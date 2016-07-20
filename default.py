@@ -124,21 +124,24 @@ class Main( xbmcgui.WindowXMLDialog ):
                 s_value = s_value.rstrip()
             else:
                 try:
-                    s_value = str( int( round( float( s_value.rstrip() ) ) ) )
+                    s_value = float( s_value.rstrip() )
                 except ValueError:
-                    s_value = str( int( round( float( s_value.rstrip().replace(',', '.') ) ) ) )
+                    s_value =  float( s_value.rstrip().replace(',', '.') )
             if item_type == "temp":
                 lw.log( ['put the information in the temperature array'] )
-                temps.append( [item_text + ':', s_value + temp_scale] )
+		if __addon__.getSetting( 'temp_scale' ) == 'Celcius':
+					temps.append( [item_text + ':', str( int( round( s_value ) ) ) + temp_scale] )
+		else:
+					temps.append( [item_text + ':', str( int( round( ( s_value * 1.8 ) + 32 ) ) ) + temp_scale] ) 
             elif item_type == "speed":
                 lw.log( ['put the information in the speed array'] )
-                speeds.append( [item_text + ':', s_value + 'rpm'] )
+                speeds.append( [item_text + ':', str( int( round( s_value ) ) ) + 'rpm'] )
             elif item_type == "voltage":
                 lw.log( ['put the information in the voltage array'] )
-                voltages.append( [item_text + ':', s_value + 'v'] )
+                voltages.append( [item_text + ':', str( int( round( s_value ) ) ) + 'v'] )
             elif item_type == "percent":
                 lw.log( ['put the information in the percent array'] );
-                percents.append( [item_text, s_value + '%'] )
+                percents.append( [item_text, str( int( round( s_value ) ) ) + '%'] )
         lw.log( [temps, speeds, voltages, percents, 'ended parsing log, displaying results'] )
         return temps, speeds, voltages, percents
 
