@@ -130,9 +130,9 @@ class Main( xbmcgui.WindowXMLDialog ):
             if item_type == "temp":
                 lw.log( ['put the information in the temperature array'] )
 		if __addon__.getSetting( 'temp_scale' ) == 'Celcius':
-					temps.append( [item_text + ':', str( int( round( s_value ) ) ) + temp_scale] )
+			temps.append( [item_text + ':', str( int( round( s_value ) ) ) + temp_scale] )
 		else:
-					temps.append( [item_text + ':', str( int( round( ( s_value * 1.8 ) + 32 ) ) ) + temp_scale] ) 
+			temps.append( [item_text + ':', str( int( round( ( s_value * 1.8 ) + 32 ) ) ) + temp_scale] ) 
             elif item_type == "speed":
                 lw.log( ['put the information in the speed array'] )
                 speeds.append( [item_text + ':', str( int( round( s_value ) ) ) + 'rpm'] )
